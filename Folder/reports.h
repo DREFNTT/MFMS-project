@@ -4,7 +4,7 @@
 #include "common.h"
 //functions
 void employeeReport(void);
-void budgetReport(void);
+void budgetReport(Budget budgets[], int budgetCount);
 void supplierReport(void);
 void assetReport(void);
 #endif
