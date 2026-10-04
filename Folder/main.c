@@ -3,7 +3,8 @@
 #include "budget.h"
 #include "employees.h"
 #include "common.h"
-
+#include "assets.h"
+#include "reports.h"
 
 int main(void)
 {
@@ -20,11 +21,12 @@ int main(void)
         printf("\n=====================================\n");
         printf(" Municipal Financial Management System\n");
         printf("=====================================\n");
-
-       printf("1. Supplier Management\n");
-printf("2. Budget Management\n");
-printf("3. Employee Management\n");
-printf("4. Exit\n");
+        printf("1. Supplier Management\n");
+        printf("2. Budget Management\n");
+        printf("3. Employee Management\n");
+        printf("4. Asset Management\n");
+        printf("5. Reports\n");
+        printf("6. Exit\n");
 
         choice = getValidInteger("Enter your choice: ");
 
@@ -76,7 +78,7 @@ printf("4. Exit\n");
                 break;
             }
 
-                       case 2:
+            case 2:
                 budgetMenu(budgets, &budgetCount);
                 break;
 
@@ -122,6 +124,93 @@ printf("4. Exit\n");
             }
 
             case 4:
+            {
+                int assetChoice;
+
+                do
+                {
+                    printf("\n--- Asset Management ---\n");
+                    printf("1. Add Asset\n");
+                    printf("2. Display Assets\n");
+                    printf("3. Search Asset\n");
+                    printf("4. Back to Main Menu\n");
+
+                    assetChoice = getValidInteger("Enter your choice: ");
+
+                    switch (assetChoice)
+                    {
+                        case 1:
+                            addAsset();
+                            break;
+
+                        case 2:
+                            displayAssets();
+                            break;
+
+                        case 3:
+                            searchAsset();
+                            break;
+
+                        case 4:
+                            printf("\nReturning to Main Menu...\n");
+                            break;
+
+                        default:
+                            printf("\nInvalid choice. Please try again.\n");
+                    }
+
+                } while (assetChoice != 4);
+
+                break;
+            }
+
+            case 5:
+            {
+                int reportChoice;
+
+                do
+                {
+                    printf("\n--- Reports ---\n");
+                    printf("1. Employee Report\n");
+                    printf("2. Budget Report\n");
+                    printf("3. Supplier Report\n");
+                    printf("4. Asset Report\n");
+                    printf("5. Back to Main Menu\n");
+
+                    reportChoice = getValidInteger("Enter your choice: ");
+
+                    switch (reportChoice)
+                    {
+                        case 1:
+                            employeeReport();
+                            break;
+
+                        case 2:
+                            budgetReport(budgets, budgetCount);
+                            break;
+
+                        case 3:
+                            supplierReport(suppliers, supplierCount);
+                            break;
+
+                        case 4:
+                            assetReport();
+                            break;
+
+                        case 5:
+                            printf("\nReturning to Main Menu...\n");
+                            break;
+
+                        default:
+                            printf("\nInvalid choice. Please try again.\n");
+                    }
+
+                } while (reportChoice != 5);
+
+                break;
+            }
+
+            case 6:
                 printf("\nExiting Municipal Financial Management System...\n");
                 break;
 
@@ -129,7 +218,7 @@ printf("4. Exit\n");
                 printf("\nInvalid choice. Please try again.\n");
         }
 
-    } while (choice != 4);
+    } while (choice != 6);
 
     return 0;
 }

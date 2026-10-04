@@ -18,4 +18,7 @@ void addAsset(void);
 void displayAssets(void);
 void searchAsset(void);
 
+extern Asset assets[MAX_ASSETS];
+extern int assetCount;
+
 #endif
