@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "suppliers.h"
 #include "budget.h"
+#include "employees.h"
 #include "common.h"
+
 
 int main(void)
 {
@@ -19,10 +21,10 @@ int main(void)
         printf(" Municipal Financial Management System\n");
         printf("=====================================\n");
 
-        printf("\n--- Main Menu ---\n");
-        printf("1. Supplier Management\n");
-        printf("2. Budget Management\n");
-        printf("3. Exit\n");
+       printf("1. Supplier Management\n");
+printf("2. Budget Management\n");
+printf("3. Employee Management\n");
+printf("4. Exit\n");
 
         choice = getValidInteger("Enter your choice: ");
 
@@ -74,11 +76,52 @@ int main(void)
                 break;
             }
 
-            case 2:
+                       case 2:
                 budgetMenu(budgets, &budgetCount);
                 break;
 
             case 3:
+            {
+                int employeeChoice;
+
+                do
+                {
+                    printf("\n--- Employee Management ---\n");
+                    printf("1. Add Employee\n");
+                    printf("2. Display Employees\n");
+                    printf("3. Search Employee\n");
+                    printf("4. Back to Main Menu\n");
+
+                    employeeChoice = getValidInteger("Enter your choice: ");
+
+                    switch (employeeChoice)
+                    {
+                        case 1:
+                            addEmployee();
+                            break;
+
+                        case 2:
+                            displayEmployees();
+                            break;
+
+                        case 3:
+                            searchEmployee();
+                            break;
+
+                        case 4:
+                            printf("\nReturning to Main Menu...\n");
+                            break;
+
+                        default:
+                            printf("\nInvalid choice. Please try again.\n");
+                    }
+
+                } while (employeeChoice != 4);
+
+                break;
+            }
+
+            case 4:
                 printf("\nExiting Municipal Financial Management System...\n");
                 break;
 
@@ -86,7 +129,7 @@ int main(void)
                 printf("\nInvalid choice. Please try again.\n");
         }
 
-    } while (choice != 3);
+    } while (choice != 4);
 
     return 0;
 }
