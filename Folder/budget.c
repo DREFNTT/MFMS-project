@@ -16,7 +16,13 @@ void budgetMenu(Budget budgets[], int *budgetCount) {
     int choice;
     printf("\n-- Budget Management --\n");
     printf("1. Enter Budget\n2. Enter Expenditure\n3. Display Budget Status\n4. Back\n");
-    choice = readIntInRange("Enter your choice: ", 1, 4);
+   choice = getValidInteger("Enter your choice: ");
+
+while (choice < 1 || choice > 4)
+{
+    printf("Invalid choice. Please enter a number between 1 and 4.\n");
+    choice = getValidInteger("Enter your choice: ");
+}
 
     switch (choice) {
         case 1: enterBudget(budgets, budgetCount); break;
@@ -34,38 +40,38 @@ void budgetMenu(Budget budgets[], int *budgetCount) {
     if (*budgetCount >= MAX_DEPARTMENTS) {
         printf("Cannot add more departments. Budget list is full.\n");
         return;
-       }
+    }
 
     printf("Enter department name: ");
     fgets(deptName, DEPT_LEN, stdin);
-    deptName[strcspn(deptName, "\n")] = '\0'; //strip trailing newline //
+    deptName[strcspn(deptName, "\n")] = '\0';
 
-    if (!isNonEmptyString(deptName)) {
+    if (strlen(deptName) == 0) {
         printf("Department name cannot be empty.\n");
         return;
-       }
+    }
 
-    // Prevent duplicate department entries //
+    // Prevent duplicate department entries
     for (int i = 0; i < *budgetCount; i++) {
         if (strcmp(budgets[i].department, deptName) == 0) {
             printf("That department already has a budget entry. Use option 2 to add expenditure instead.\n");
             return;
-          }
-     }
+        }
+    }
 
     printf("Enter allocated budget (N$): ");
     scanf("%lf", &allocated);
-    while (getchar() != '\n'); // clear leftover newline from scanf //
+    while (getchar() != '\n');
 
-    if (!isPositiveNumber(allocated)) {
+    if (allocated < 0) {
         printf("Allocated budget cannot be negative.\n");
         return;
-       }
+    }
 
-     strcpy(budgets[*budgetCount].department, deptName);
-   budgets[*budgetCount].allocatedBudget = allocated;
-     budgets[*budgetCount].expenditure = 0.0;
-     (*budgetCount)++;
+    strcpy(budgets[*budgetCount].department, deptName);
+    budgets[*budgetCount].allocatedBudget = allocated;
+    budgets[*budgetCount].expenditure = 0.0;
+    (*budgetCount)++;
 
     printf("Budget added for %s.\n", deptName);
 }
@@ -91,10 +97,10 @@ void enterExpenditure(Budget budgets[], int budgetCount) {
      scanf("%lf", &amount);
             while (getchar() != '\n');
 
-   if (!isPositiveNumber(amount)) {
-        printf("Expenditure cannot be negative.\n");
-      return;
-            }
+ if (amount < 0) {
+    printf("Expenditure cannot be negative.\n");
+    return;
+}
 
      budgets[i].expenditure += amount;
    found = 1;
