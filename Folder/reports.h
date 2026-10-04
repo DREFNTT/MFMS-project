@@ -5,6 +5,6 @@
 //functions
 void employeeReport(void);
 void budgetReport(Budget budgets[], int budgetCount);
-void supplierReport(void);
+void supplierReport(Supplier suppliers[], int supplierCount);
 void assetReport(void);
 #endif
