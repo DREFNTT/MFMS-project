@@ -1,7 +1,9 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-/* ---- Shared limits (agree on these as a group) ---- */
+#include <stddef.h>
+
+/* ---- Shared limits ---- */
 #define MAX_EMPLOYEES 100
 #define MAX_NAME_LEN  50
 
@@ -13,10 +15,12 @@ typedef struct {
     double basicSalary;
     double housingAllowance;
     double transportAllowance;
-    double totalSalary;          /* basic + housing + transport */
+    double totalSalary;
 } Employee;
 
-/* Budget, Supplier and Asset structs get added here by Students 2, 3, 4 */
+/* ---- Input validation functions (Student 6) ---- */
+int getValidInteger(const char *prompt);
+int getValidPositiveInteger(const char *prompt);
+void getValidNonEmptyString(const char *prompt, char *output, size_t size);
 
 #endif
-
